@@ -47,11 +47,11 @@ fig_size=mt.rcParams["figure.figsize"]
 fig_size[1]=50 
 fig_size[0]=50 
 mt.rcParams["figure.figsize"]=fig_size 
-mt.xlim([-2,450])
+mt.xlim([-2,len(list1)*2])
 j=0
 i1=[]
 mt.ylabel('Co level(mean)') 
-for i in range(0,450,2):
+for i in range(0,len(list1)*2,2):
      mt.bar(i,k[j],width=2,label=list1[j])
      if(k[j]<=2):
          mt.text(i,k[j]+1.5,list1[j],verticalalignment='top',horizontalalignment='center',rotation='vertical',size=4,color='green',style='oblique',weight='bold')
