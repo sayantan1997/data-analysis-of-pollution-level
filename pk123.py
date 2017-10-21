@@ -49,11 +49,17 @@ fig_size[0]=50
 mt.rcParams["figure.figsize"]=fig_size 
 mt.xlim([-2,450])
 j=0
+i1=[]
 mt.ylabel('Co level(mean)') 
 for i in range(0,450,2):
-     mt.bar(i,k[j],width=1.5,label=list1[j])
+     mt.bar(i,k[j],width=2,label=list1[j])
+     if(k[j]<=2):
+         mt.text(i,k[j]+1.5,list1[j],verticalalignment='top',horizontalalignment='center',rotation='vertical',size=4,color='green',style='oblique',weight='bold')
+     else:
+         mt.text(i,k[j]+1,list1[j],verticalalignment='top',horizontalalignment='center',rotation='vertical',size=4,color='green',style='oblique',weight='bold')
+     i1.append(j)
      j=j+1
-mt.xticks(np.arange(0,450,2),list1,size=4,rotation='vertical')
+mt.xticks(np.arange(0,450,2),list1,size=3,rotation='vertical',weight='bold')
 #freq_ser=pd.Series.from_array(k)
 #k1=freq_ser.plot('bar',width=5,color='r')
 #k1.set_xticklabels(objects,size=5)
@@ -62,7 +68,7 @@ mt.xticks(np.arange(0,450,2),list1,size=4,rotation='vertical')
 #    height=rect.get_height()
 #    k1.text(rect.get_x()+rect.get_width()/2,height+3,lis,size=5,verticalalignment='center',horizontalalignment='left',rotation='vertical')
 #mt.xticks(np.arange(225),objects,size=3,rotation='vertical')
-mt.legend(loc='upper right',prop={'size':5},labelspacing=0.2)
+#mt.legend(loc='upper right',prop={'size':5},labelspacing=0.2)
 #mt.bar(np.arange(len(objects)),k,width=3)
 #mt.xlim([0,300])
 #mt.xticks(np.arange(len(list1)),objects,size=3)
