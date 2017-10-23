@@ -1,12 +1,13 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as mt
-data=pd.read_csv('mod2017.csv');
+data=pd.read_csv('2-2017(PETROL).csv');
 print(data.describe())
 temp1=data['Vehicle_Model'].value_counts(ascending=True)
 print(temp1)
+poll=input("enter choice of pollutant: 1.Co 2.HC 3.CO2 4.O2")
 time=np.array(data['Vehicle_Model'][1:])
-time2=np.array(data['Co'][1:])
+time2=np.array(data[poll][1:])
 dict1={}
 mt.title('january 2017')
 for i in range(0,len(time)):
@@ -27,51 +28,43 @@ print(len(list1))
 for i in range(0,len(list1)):
     temp2=np.array(dict1[list1[i]])
     k.append(temp2.mean())
-    #print(list1[i])
-    #print(k)
-    #print("\n")
     objects=list(objects)
     objects.insert(i,list1[i])
     objects=tuple(objects)
     y.append(k)
-#y_pos=np.arange(len(objects))
-#barchart=mt.bar(y_pos,y,align='center',width=0.2,label='yo')
-#for i in range(0,15):
-#    if i%2==0:
-#        barchart[i].set_color('r')
-#mt.xticks(y_pos,objects,size=6)
-#mt.legend()
-#mt.rc('xtick',labelsize=10)
-#mt.show()
 fig_size=mt.rcParams["figure.figsize"]  
 fig_size[1]=50 
 fig_size[0]=50 
 mt.rcParams["figure.figsize"]=fig_size 
-mt.xlim([-2,450])
+mt.xlim([-2,len(list1)*2])
 j=0
-i1=[]
-mt.ylabel('Co level(mean)') 
-for i in range(0,450,2):
-     mt.bar(i,k[j],width=2,label=list1[j])
-     if(k[j]<=2):
-         mt.text(i,k[j]+1.5,list1[j],verticalalignment='top',horizontalalignment='center',rotation='vertical',size=4,color='green',style='oblique',weight='bold')
+p=0.5
+count=0
+maxi=max(k)
+mini=min(k)
+avg=(maxi+mini)/2
+print(avg)
+print(k[0])
+print(k[1])
+mt.ylabel(poll+'(mean)') 
+for i in range(0,len(list1)*2,2):
+     mt.bar(i,k[j],width=1,label=list1[j])
+     if(k[j]>100 and count<1):
+        p=p*1000
+        count=count+1
+     if(k[j]<avg):
+        mt.text(i,k[j]+(avg/5),list1[j],verticalalignment='top',rotation='vertical',size=4,color='brown',style='oblique',weight='bold')
      else:
-         mt.text(i,k[j]+1,list1[j],verticalalignment='top',horizontalalignment='center',rotation='vertical',size=4,color='green',style='oblique',weight='bold')
-     i1.append(j)
+        mt.text(i,k[j]+(k[j]/10),list1[j],verticalalignment='top',rotation='vertical',size=4,color='green',style='oblique',weight='bold')
      j=j+1
-mt.xticks(np.arange(0,450,2),list1,size=3,rotation='vertical',weight='bold')
-#freq_ser=pd.Series.from_array(k)
-#k1=freq_ser.plot('bar',width=5,color='r')
-#k1.set_xticklabels(objects,size=5)
-#rects=k1.patches
-#for rect,lis in zip(rects,list1):
-#    height=rect.get_height()
-#    k1.text(rect.get_x()+rect.get_width()/2,height+3,lis,size=5,verticalalignment='center',horizontalalignment='left',rotation='vertical')
-#mt.xticks(np.arange(225),objects,size=3,rotation='vertical')
-#mt.legend(loc='upper right',prop={'size':5},labelspacing=0.2)
-#mt.bar(np.arange(len(objects)),k,width=3)
-#mt.xlim([0,300])
-#mt.xticks(np.arange(len(list1)),objects,size=3)
+k3=mt.subplot()
+k4=k3.get_ylim()
+print(k4[0])
+#j=0
+#for i in range(0,len(list1)*2,2):
+#     mt.text(i,k[j]+k4[1]//10,list1[j],verticalalignment='top',horizontalalignment='center',rotation='vertical',size=4,color='green',style='oblique',weight='bold')
+#     j=j+1
+mt.xticks(np.arange(0,len(list1)*2,2),list1,size=3,rotation='vertical',weight='bold')
 mt.show()
 
        
