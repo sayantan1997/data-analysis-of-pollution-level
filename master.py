@@ -64,6 +64,7 @@ print(k4[0])
 #for i in range(0,len(list1)*2,2):
 #     mt.text(i,k[j]+k4[1]//10,list1[j],verticalalignment='top',horizontalalignment='center',rotation='vertical',size=4,color='green',style='oblique',weight='bold')
 #     j=j+1
+#master program
 mt.xticks(np.arange(0,len(list1)*2,2),list1,size=3,rotation='vertical',weight='bold')
 mt.show()
 
